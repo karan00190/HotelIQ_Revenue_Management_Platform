@@ -1,0 +1,2 @@
+hotel_id,room_id,check_in_date,guest_name,num_guests,booking_price
+1,1,2026-08-15,No Checkout Or BasePrice,2,16000

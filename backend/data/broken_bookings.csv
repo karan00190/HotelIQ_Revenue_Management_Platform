@@ -1,0 +1,7 @@
+hotel_id,room_id,check_in_date,check_out_date,guest_name,num_guests,booking_price,base_price
+1,1,2026-08-15,2026-08-12,Bad Dates,2,16000,18000
+1,2,2026-08-16,2026-08-18,Neg Price,1,-500,6000
+2,3,2026-08-20,2026-08-25,Zero Guests,0,24000,30000
+2,3,2026-08-20,2026-08-25,Dup Row,3,24000,30000
+3,5,2026-09-01,2026-09-04,Huge Outlier,2,9999999,15000
+3,6,2026-09-10,2026-09-12,Good Row,1,5000,6000

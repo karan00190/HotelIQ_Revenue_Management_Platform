@@ -1,0 +1,20 @@
+# Python / backend
+backend/venv/
+**/__pycache__/
+*.pyc
+backend/hoteliq.db
+backend/uvicorn.log
+backend/.env
+
+# Frontend (frontend/.gitignore already covers node_modules, .next, etc.
+# for anything under frontend/ — this is just belt-and-suspenders)
+frontend/.env.local
+
+# Claude Code local state and AI-agent instruction files
+.claude/
+**/CLAUDE.md
+**/AGENTS.md
+frontend/devserver.log
+backend/data/uploads/*
+
+

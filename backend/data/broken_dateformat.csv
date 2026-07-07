@@ -1,0 +1,2 @@
+hotel_id,room_id,check_in_date,check_out_date,guest_name,num_guests,booking_price,base_price
+1,1,not-a-date,2026-08-18,Bad Format,2,16000,18000
