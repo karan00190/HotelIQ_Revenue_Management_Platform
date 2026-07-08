@@ -7,21 +7,21 @@ A full-stack revenue management system for hotels: demand forecasting, dynamic p
 
 
 ### Dashboard
-![Dashboard](Dashboard.png)
+![Dashboard](docs/screenshots/Dashboard.png)
 *Real-time occupancy, ADR, and RevPAR across all properties, with a 30-day revenue trend and an occupancy heatmap.*
 
 ### ML Challenger
-![ML Challenger — forecast comparison](MLChallenger1.png)
-![ML Challenger — revenue backtest](MLChallenger2.png)
+![ML Challenger — forecast comparison](docs/screenshots/MLChallenger1.png)
+![ML Challenger — revenue backtest](docs/screenshots/MLChallenger2.png)
 *XGBoost vs. Prophet forecast accuracy on a held-out test window, plus a revenue backtest that reprices real historical bookings through the pricing engine under each model's forecast — with the methodology and assumptions stated directly next to the numbers.*
 
 ### Forecast
-![Forecast — demand chart](Forecast1.png)
-![Forecast — pricing calculator](Forecast2.png)
+![Forecast — demand chart](docs/screenshots/Forecast1.png)
+![Forecast — pricing calculator](docs/screenshots/Forecast2.png)
 *30-day occupancy forecast with confidence intervals, and a dynamic pricing calculator that turns the forecast into a concrete price recommendation.*
 
 ### Analytics
-![Analytics](Analytics.png)
+![Analytics](docs/screenshots/Analytics.png)
 *ADR/RevPAR trends, booking source breakdown, and weekend vs. weekday pricing comparison.*
 
 
