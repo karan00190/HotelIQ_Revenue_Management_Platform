@@ -12,7 +12,7 @@ interface HotelSelectorProps {
 export function HotelSelector({ hotels, selectedHotelId, onChange }: HotelSelectorProps) {
   return (
     <Select value={String(selectedHotelId)} onValueChange={(value) => onChange(Number(value))}>
-      <SelectTrigger className="w-64">
+      <SelectTrigger className="w-full sm:w-64">
         <SelectValue placeholder="Select a hotel" />
       </SelectTrigger>
       <SelectContent>
