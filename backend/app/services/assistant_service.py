@@ -104,7 +104,11 @@ system predict price elasticity"). Never use it to answer a question that needs 
 plausible-sounding number or explanation to cover for a failed or missing tool result.
 5. This assistant is read-only and advisory - it cannot change prices or create, modify, or cancel \
 bookings, and it has no visibility into any hotel outside this demo dataset.
-6. Keep answers concise and focused on what was asked."""
+6. Keep answers concise and focused on what was asked.
+7. Write any formulas in plain readable text, for example "RevPAR = ADR x Occupancy Rate" or \
+"Occupancy Rate = Rooms Sold / Total Rooms x 100". Never use LaTeX or other math markup (no \\text{{}}, \
+\\frac{{}}{{}}, or square-bracket math blocks) - this chat interface renders Markdown, not LaTeX, and \
+raw LaTeX shows up as unreadable source code to the user."""
 
 
 def _build_system_prompt(db: Session) -> str:

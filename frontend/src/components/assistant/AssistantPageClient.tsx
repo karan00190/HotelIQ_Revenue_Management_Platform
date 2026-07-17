@@ -96,7 +96,7 @@ export function AssistantPageClient({
         </div>
       ) : (
         <>
-          <div className="flex min-h-[420px] flex-col gap-4 rounded-xl bg-muted/20 p-4 md:p-6">
+          <div className="flex min-h-[420px] flex-col gap-4 rounded-xl border border-border bg-muted p-4 md:p-6">
             {messages.length === 0 && (
               <div className="flex flex-1 flex-col items-center justify-center gap-4 py-10 text-center">
                 <p className="text-sm text-muted-foreground">Try asking:</p>
@@ -105,7 +105,7 @@ export function AssistantPageClient({
                     <button
                       key={q}
                       onClick={() => handleSend(q)}
-                      className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-foreground transition-colors hover:bg-accent/50"
+                      className="rounded-full border border-border bg-card px-3 py-1.5 text-xs text-foreground shadow-sm transition-colors hover:bg-primary hover:text-primary-foreground"
                     >
                       {q}
                     </button>
