@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { TrendPoint } from "@/lib/api";
@@ -10,6 +10,18 @@ const WEEKDAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 // Present Monday -> Sunday, a more natural week reading order than the
 // JS Date default (Sunday=0).
 const WEEK_ORDER = [1, 2, 3, 4, 5, 6, 0];
+
+// One distinct hue per weekday bar, ending on the warm gold for the weekend
+// so Sat/Sun read as the standout leisure-demand days.
+const WEEKDAY_COLORS = [
+  "var(--chart-1)",
+  "var(--chart-4)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-5)",
+  "var(--brand-gold)",
+  "var(--brand-gold-light)",
+];
 
 function aggregateByWeekday(data: TrendPoint[]) {
   const sums = new Array(7).fill(0);
@@ -59,7 +71,11 @@ export function OccupancyByWeekdayChart({ data }: { data: TrendPoint[] }) {
                 fontSize: 12,
               }}
             />
-            <Bar dataKey="averageOccupancy" fill="var(--chart-1)" radius={[4, 4, 0, 0]} maxBarSize={24} />
+            <Bar dataKey="averageOccupancy" radius={[4, 4, 0, 0]} maxBarSize={28}>
+              {chartData.map((_, i) => (
+                <Cell key={i} fill={WEEKDAY_COLORS[i % WEEKDAY_COLORS.length]} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </CardContent>

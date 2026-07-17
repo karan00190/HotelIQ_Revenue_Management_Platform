@@ -1,5 +1,6 @@
 "use client";
 
+import { Sparkles, User } from "lucide-react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -14,12 +15,12 @@ const markdownComponents: Components = {
   ol: ({ children }) => <ol className="mb-2 list-decimal space-y-0.5 pl-5 last:mb-0">{children}</ol>,
   li: ({ children }) => <li>{children}</li>,
   a: ({ children, href }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-assistant-glow underline underline-offset-2">
       {children}
     </a>
   ),
   code: ({ children }) => (
-    <code className="rounded bg-black/10 px-1 py-0.5 font-mono text-[0.85em] dark:bg-white/15">{children}</code>
+    <code className="rounded bg-foreground/10 px-1 py-0.5 font-mono text-[0.85em]">{children}</code>
   ),
   table: ({ children }) => (
     <div className="mb-2 overflow-x-auto last:mb-0">
@@ -27,10 +28,25 @@ const markdownComponents: Components = {
     </div>
   ),
   th: ({ children }) => (
-    <th className="border border-current/20 px-2 py-1 text-left font-semibold">{children}</th>
+    <th className="border border-border px-2 py-1 text-left font-semibold">{children}</th>
   ),
-  td: ({ children }) => <td className="border border-current/20 px-2 py-1">{children}</td>,
+  td: ({ children }) => <td className="border border-border px-2 py-1">{children}</td>,
 };
+
+function Avatar({ isUser }: { isUser: boolean }) {
+  return (
+    <div
+      className={cn(
+        "flex size-8 shrink-0 items-center justify-center rounded-full text-white shadow-sm ring-1 ring-white/25",
+        isUser
+          ? "bg-linear-to-br from-chat-user-from to-chat-user-to"
+          : "bg-linear-to-br from-chat-user-to to-chat-user-from",
+      )}
+    >
+      {isUser ? <User className="size-4" /> : <Sparkles className="size-4" />}
+    </div>
+  );
+}
 
 function ToolCallChip({ call }: { call: AssistantToolCall }) {
   const argsText = Object.keys(call.args).length > 0 ? JSON.stringify(call.args) : "";
@@ -63,14 +79,20 @@ export function ChatMessage({
   const isUser = role === "user";
 
   return (
-    <div className={cn("flex w-full", isUser ? "justify-end" : "justify-start")}>
-      <div className={cn("flex max-w-[80%] flex-col gap-2", isUser ? "items-end" : "items-start")}>
+    <div
+      className={cn(
+        "flex w-full items-end gap-2.5 duration-300 animate-in fade-in slide-in-from-bottom-2",
+        isUser ? "justify-end" : "justify-start",
+      )}
+    >
+      {!isUser && <Avatar isUser={false} />}
+      <div className={cn("flex max-w-[78%] flex-col gap-2", isUser ? "items-end" : "items-start")}>
         <div
           className={cn(
-            "rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm",
+            "rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm ring-1",
             isUser
-              ? "bg-primary text-primary-foreground"
-              : "border border-border bg-card text-card-foreground",
+              ? "rounded-br-md bg-linear-to-br from-chat-user-from to-chat-user-to text-white shadow-md ring-white/10"
+              : "rounded-bl-md bg-linear-to-br from-assistant-bubble to-assistant-bubble-2 text-foreground ring-assistant-bubble-border",
           )}
         >
           {isUser ? (
@@ -83,8 +105,8 @@ export function ChatMessage({
         </div>
 
         {!isUser && toolCalls && toolCalls.length > 0 && (
-          <details className="w-full rounded-lg border border-border bg-muted px-3 py-2">
-            <summary className="cursor-pointer text-xs font-medium text-muted-foreground">
+          <details className="w-full rounded-lg border border-border bg-card/60 px-3 py-2">
+            <summary className="cursor-pointer text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
               How I got this ({toolCalls.length} tool call{toolCalls.length > 1 ? "s" : ""})
             </summary>
             <div className="mt-2 flex flex-col gap-1.5">
@@ -95,7 +117,23 @@ export function ChatMessage({
           </details>
         )}
 
-        {!isUser && model && <span className="text-[11px] text-muted-foreground">{model}</span>}
+        {!isUser && model && <span className="px-1 text-[11px] text-muted-foreground">{model}</span>}
+      </div>
+      {isUser && <Avatar isUser={true} />}
+    </div>
+  );
+}
+
+export function TypingIndicator() {
+  return (
+    <div className="flex w-full items-end gap-2.5 duration-300 animate-in fade-in">
+      <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-chat-user-to to-chat-user-from text-white shadow-sm ring-1 ring-white/25">
+        <Sparkles className="size-4" />
+      </div>
+      <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-linear-to-br from-assistant-bubble to-assistant-bubble-2 px-4 py-3.5 shadow-sm ring-1 ring-assistant-bubble-border">
+        <span className="size-1.5 animate-bounce rounded-full bg-chat-user-to" />
+        <span className="size-1.5 animate-bounce rounded-full bg-chat-user-from delay-150" />
+        <span className="size-1.5 animate-bounce rounded-full bg-chat-user-to delay-300" />
       </div>
     </div>
   );

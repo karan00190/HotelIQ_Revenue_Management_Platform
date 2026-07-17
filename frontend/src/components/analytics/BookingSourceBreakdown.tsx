@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { BookingSourceDistribution } from "@/lib/api";
@@ -12,6 +12,14 @@ const SOURCE_LABELS: Record<string, string> = {
   expedia: "Expedia",
   makemytrip: "MakeMyTrip",
 };
+
+const SOURCE_COLORS = [
+  "var(--chart-1)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-5)",
+];
 
 export function BookingSourceBreakdown({ data }: { data: BookingSourceDistribution }) {
   const chartData = data.sources.map((s) => ({
@@ -52,7 +60,10 @@ export function BookingSourceBreakdown({ data }: { data: BookingSourceDistributi
                 fontSize: 12,
               }}
             />
-            <Bar dataKey="count" fill="var(--chart-1)" radius={[0, 4, 4, 0]} maxBarSize={20}>
+            <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={22}>
+              {chartData.map((_, i) => (
+                <Cell key={i} fill={SOURCE_COLORS[i % SOURCE_COLORS.length]} />
+              ))}
               <LabelList
                 dataKey="percent"
                 position="right"

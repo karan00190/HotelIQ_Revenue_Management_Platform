@@ -91,9 +91,9 @@ export function Dashboard({ hotels, initial }: { hotels: Hotel[]; initial: Dashb
   return (
     <div className="flex w-full flex-col gap-6 p-6 md:p-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-foreground">HotelIQ Dashboard</h1>
-          <p className="text-sm text-muted-foreground">Revenue management overview</p>
+        <div className="duration-500 animate-in fade-in slide-in-from-left-2">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">HotelIQ Dashboard</h1>
+          <p className="mt-0.5 text-sm text-muted-foreground">Revenue management overview</p>
         </div>
         <HotelSelector hotels={hotels} selectedHotelId={hotelId} onChange={setHotelId} />
       </div>
@@ -102,18 +102,26 @@ export function Dashboard({ hotels, initial }: { hotels: Hotel[]; initial: Dashb
         <KpiCard
           label="Today's occupancy"
           value={daily.data ? `${daily.data.occupancy_rate.toFixed(1)}%` : "—"}
+          accent="var(--chart-1)"
+          index={0}
         />
         <KpiCard
           label="Last 30 days revenue"
           value={revenue.data ? currency.format(revenue.data.total_revenue) : "—"}
+          accent="var(--chart-2)"
+          index={1}
         />
         <KpiCard
           label="Today's ADR"
           value={daily.data ? currency.format(daily.data.average_daily_rate) : "—"}
+          accent="var(--chart-3)"
+          index={2}
         />
         <KpiCard
           label="Today's RevPAR"
           value={daily.data ? currency.format(daily.data.revenue_per_available_room) : "—"}
+          accent="var(--chart-4)"
+          index={3}
         />
       </div>
 
@@ -122,6 +130,8 @@ export function Dashboard({ hotels, initial }: { hotels: Hotel[]; initial: Dashb
           label="Active bookings"
           value={activeBookings !== undefined ? String(activeBookings) : "—"}
           hint="confirmed + completed"
+          accent="var(--status-good)"
+          index={4}
         />
         <KpiCard
           label="Cancelled bookings"
@@ -131,6 +141,8 @@ export function Dashboard({ hotels, initial }: { hotels: Hotel[]; initial: Dashb
               ? `${cancellations.data.cancellation_rate.toFixed(1)}% cancellation rate`
               : undefined
           }
+          accent="var(--chart-5)"
+          index={5}
         />
       </div>
 
