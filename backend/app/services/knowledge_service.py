@@ -20,7 +20,6 @@ EMBED_MODEL = "gemini-embedding-001"
 OUTPUT_DIMENSIONALITY = 768
 
 _collection = None
-_collection_load_failed = False
 
 
 def _l2_normalize(vec: list[float]) -> list[float]:
@@ -50,14 +49,16 @@ def _embed_query(query: str) -> list[float]:
 
 
 def _get_collection():
-    global _collection, _collection_load_failed
+    """Loading the collection is cheap (a local path check + opening a
+    sqlite file), so failure is never cached - only success is. Caching
+    failure would permanently disable knowledge search for the rest of the
+    process's life after one transient error, with no way to recover short
+    of a restart."""
+    global _collection
     if _collection is not None:
         return _collection
-    if _collection_load_failed:
-        raise RuntimeError("Knowledge index failed to load earlier in this process")
 
     if not CHROMA_DIR.exists():
-        _collection_load_failed = True
         raise RuntimeError(
             f"Knowledge index not found at {CHROMA_DIR}. "
             "Run `python -m app.scripts.build_knowledge_index` first."
