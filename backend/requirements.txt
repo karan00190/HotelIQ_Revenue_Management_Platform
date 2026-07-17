@@ -10,3 +10,7 @@ xgboost
 prophet
 holidays
 numpy
+langchain==1.3.13
+langchain-groq==1.1.3
+langchain-google-genai==4.2.7
+chromadb==1.5.9

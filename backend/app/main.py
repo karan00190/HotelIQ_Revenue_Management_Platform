@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import analytics, bookings, forecasting, hotels, ingestion, ml_pricing, rooms, smart_queries
+from app.api import analytics, assistant, bookings, forecasting, hotels, ingestion, ml_pricing, rooms, smart_queries
 from app.database.init_db import init_db
 
 load_dotenv()
@@ -40,6 +40,7 @@ app.include_router(analytics.router)
 app.include_router(smart_queries.router)
 app.include_router(forecasting.router)
 app.include_router(ml_pricing.router)
+app.include_router(assistant.router)
 
 
 @app.get("/")

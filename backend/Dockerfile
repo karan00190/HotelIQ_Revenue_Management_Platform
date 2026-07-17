@@ -27,5 +27,10 @@ RUN mkdir -p data/uploads
 RUN python -m app.services.data_generator
 RUN python -m app.scripts.recalculate_metrics
 
+# Build the RAG knowledge index from the committed, already-embedded
+# app/knowledge/embeddings.json - no API keys needed at build time, and it
+# fails loudly if the corpus and embeddings.json have drifted apart.
+RUN python -m app.scripts.build_knowledge_index
+
 EXPOSE 8000
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

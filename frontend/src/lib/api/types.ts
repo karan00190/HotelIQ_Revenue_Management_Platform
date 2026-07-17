@@ -307,3 +307,31 @@ export interface RevenueBacktestResult {
   assumptions: string[];
   per_booking_detail: PerBookingDetail[];
 }
+
+// ---------- Assistant ----------
+
+export interface AssistantChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export interface AssistantToolCall {
+  tool: string;
+  args: Record<string, unknown>;
+  ok: boolean;
+  summary: unknown;
+}
+
+export interface AssistantChatResult {
+  reply: string;
+  tool_calls: AssistantToolCall[];
+  model: string;
+  elapsed_ms: number;
+}
+
+export interface AssistantStatus {
+  configured: boolean;
+  model: string;
+  knowledge_available: boolean;
+  knowledge_chunks: number;
+}

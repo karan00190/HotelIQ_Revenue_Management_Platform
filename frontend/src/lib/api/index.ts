@@ -1,6 +1,9 @@
 import { apiClient } from "./client";
 import type {
   AnalyticsSummary,
+  AssistantChatMessage,
+  AssistantChatResult,
+  AssistantStatus,
   Booking,
   BookingSourceDistribution,
   CancellationAnalysis,
@@ -105,6 +108,12 @@ export const mlApi = {
     apiClient.get<ForecastResult>(`/ml/predict/${hotelId}`, params),
   compare: (hotelId: number) => apiClient.get<ForecastComparisonResult>(`/ml/compare/${hotelId}`),
   backtest: (hotelId: number) => apiClient.get<RevenueBacktestResult>(`/ml/backtest/${hotelId}`),
+};
+
+export const assistantApi = {
+  status: () => apiClient.get<AssistantStatus>("/assistant/status"),
+  chat: (message: string, history: AssistantChatMessage[]) =>
+    apiClient.post<AssistantChatResult>("/assistant/chat", { message, history }),
 };
 
 export const ingestionApi = {

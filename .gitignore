@@ -16,5 +16,6 @@ frontend/.env.local
 **/AGENTS.md
 frontend/devserver.log
 backend/data/uploads/*
+backend/data/chroma/
 
 

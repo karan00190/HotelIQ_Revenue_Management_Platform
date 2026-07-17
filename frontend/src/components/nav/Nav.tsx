@@ -9,6 +9,7 @@ const LINKS = [
   { href: "/bookings", label: "Bookings" },
   { href: "/forecast", label: "Forecast" },
   { href: "/backtest", label: "ML Challenger" },
+  { href: "/assistant", label: "Assistant" },
   { href: "/hotels", label: "Hotels" },
 ];
 
