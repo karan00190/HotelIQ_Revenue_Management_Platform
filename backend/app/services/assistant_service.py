@@ -158,6 +158,12 @@ def _extract_tool_calls(messages: list) -> list[dict]:
 
 
 def _map_provider_error(exc: Exception) -> AssistantProviderError:
+    # The user-facing message is deliberately sanitized (no raw provider
+    # response), so the full exception is printed here - this is the only
+    # place the real cause survives, visible in the server's own logs
+    # (e.g. Render's Logs tab) when the sanitized message alone isn't
+    # enough to diagnose why the provider rejected a request.
+    print(f"[assistant] provider error: {type(exc).__name__}: {exc}")
     message = str(exc).lower()
     if "429" in message or "rate limit" in message or "quota" in message:
         return AssistantProviderError("The free LLM tier is briefly rate-limited - please try again in about 30 seconds.")
