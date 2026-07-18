@@ -1,0 +1,4 @@
+# Test-only dependencies. Kept separate from requirements.txt so the runtime
+# image never ships pytest. httpx (used by FastAPI's TestClient) is already a
+# runtime dependency, so it is not repeated here.
+pytest==9.1.1

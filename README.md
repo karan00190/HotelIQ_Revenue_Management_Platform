@@ -1,5 +1,7 @@
 # HotelIQ — AI-Powered Hotel Revenue Management Platform
 
+[![CI](https://github.com/karan00190/HotelIQ_Revenue_Management_Platform/actions/workflows/ci.yml/badge.svg)](https://github.com/karan00190/HotelIQ_Revenue_Management_Platform/actions/workflows/ci.yml)
+
 A full-stack revenue management system for hotels: demand forecasting, dynamic pricing, and analytics — built end-to-end (data pipeline → ML → API → UI) to explore how real revenue management teams use data to price rooms and forecast demand.
 
 **Live demo:** [View the live app →](https://hotel-iq-revenue-management-platfor.vercel.app/)
